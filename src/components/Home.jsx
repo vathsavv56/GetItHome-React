@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
     return (
@@ -11,8 +12,8 @@ export default function Home() {
                             <h1>The modern way to manage your home.</h1>
                             <p className="subtitle">Book trusted professionals for grooming, cooking, and cleaning in minutes. Reclaim your time with expert service, delivered.</p>
                             <div className="button-group">
-                                <a className="cta-button" href="#/services">Book Your First Expert</a>
-                                <a href="#/howitworks" className="secondary-cta">Learn More</a>
+                                <Link className="cta-button" to="/services">Book Your First Expert</Link>
+                                <Link to="/howitworks" className="secondary-cta">Learn More</Link>
                             </div>
                             <div className="hero-stats">
                                 <div className="stat-item">
@@ -111,7 +112,7 @@ export default function Home() {
                                 <li>✓ Vetted professionals</li>
                                 <li>✓ Pay per booking</li>
                             </ul>
-                            <a href="#/services" className="secondary-cta cta-button" style={{ backgroundColor: 'transparent', color: '#14b8a6' }}>Book Now</a>
+                            <Link to="/services" className="secondary-cta cta-button" style={{ backgroundColor: 'transparent', color: '#14b8a6' }}>Book Now</Link>
                         </div>
                         <div className="pricing-card popular">
                             <p className="plan-name">Monthly</p>
@@ -122,7 +123,7 @@ export default function Home() {
                                 <li>✓ 10% off extra services</li>
                                 <li>✓ Dedicated support</li>
                             </ul>
-                            <a href="#/services" className="cta-button">Choose Plan</a>
+                            <Link to="/services" className="cta-button">Choose Plan</Link>
                         </div>
                         <div className="pricing-card">
                             <p className="plan-name">Annual</p>
@@ -133,7 +134,7 @@ export default function Home() {
                                 <li>✓ 20% off extra services</li>
                                 <li>✓ Premium support</li>
                             </ul>
-                            <a href="#/services" className="secondary-cta cta-button" style={{ backgroundColor: 'transparent', color: '#14b8a6' }}>Choose Plan</a>
+                            <Link to="/services" className="secondary-cta cta-button" style={{ backgroundColor: 'transparent', color: '#14b8a6' }}>Choose Plan</Link>
                         </div>
                     </div>
                 </div>
@@ -147,30 +148,30 @@ export default function Home() {
                         <p>Tips, tricks, and stories to help you manage your home.</p>
                     </div>
                     <div className="grid grid-cols-md-2 grid-cols-lg-3">
-                        <a href="#/blog" className="blog-card">
+                        <Link to="/blog" className="blog-card">
                             <img src="https://placehold.co/600x400/e0f2f1/1a202c?text=Blog" alt="Blog post thumbnail" loading="lazy" />
                             <div className="blog-card-content">
                                 <p className="category">Home Cleaning</p>
                                 <h3>5 Cleaning Hacks That Will Change Your Life</h3>
                                 <p>Discover simple tricks to keep your home sparkling with minimal effort...</p>
                             </div>
-                        </a>
-                        <a href="#/blog" className="blog-card">
+                        </Link>
+                        <Link to="/blog" className="blog-card">
                             <img src="https://placehold.co/600x400/e0f2f1/1a202c?text=Blog" alt="Blog post thumbnail" loading="lazy" />
                             <div className="blog-card-content">
                                 <p className="category">Cooking</p>
                                 <h3>Easy Weeknight Meals for Busy Professionals</h3>
                                 <p>Tired of takeout? Here are 3 healthy and delicious recipes you can make in under 30 minutes...</p>
                             </div>
-                        </a>
-                        <a href="#/blog" className="blog-card">
+                        </Link>
+                        <Link to="/blog" className="blog-card">
                             <img src="https://placehold.co/600x400/e0f2f1/1a202c?text=Blog" alt="Blog post thumbnail" loading="lazy" />
                             <div className="blog-card-content">
                                 <p className="category">Grooming</p>
                                 <h3>How to Maintain the Perfect Haircut at Home</h3>
                                 <p>Learn from our expert stylists how to keep your hair looking fresh between appointments...</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -223,7 +224,7 @@ export default function Home() {
                     <div className="final-cta-card">
                         <h2>Ready to reclaim your time?</h2>
                         <p>Join thousands of happy customers and experience the future of home services today.</p>
-                        <a href="#/services" className="cta-button">Find Your Perfect Expert</a>
+                        <Link to="/services" className="cta-button">Find Your Perfect Expert</Link>
                     </div>
                 </div>
             </section>

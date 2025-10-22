@@ -1,0 +1,19 @@
+# Dependencies
+/node_modules
+/server/node_modules
+
+# Production
+/dist
+
+# Environment variables
+.env
+server/.env
+
+# Logs
+*.log
+
+# Coverage
+/coverage
+
+# IDE
+.idea/

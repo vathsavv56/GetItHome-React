@@ -1,38 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Blog from './components/Blog'
 import HowItWorks from './components/HowItWorks'
 import Services from './components/Services'
 import Login from './components/Login'
-import Footer from './components/Footer'
-
-const routes = {
-    '': Home,
-    '#/': Home,
-    '#/home': Home,
-    '#/blog': Blog,
-    '#/howitworks': HowItWorks,
-    '#/services': Services,
-    '#/login': Login,
-}
+import Signup from './components/Signup'
+import Footer from './components/FooterRouter'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 export default function App() {
-    const [hash, setHash] = useState(window.location.hash || '#/')
-
-    useEffect(() => {
-        const onHash = () => setHash(window.location.hash || '#/')
-        window.addEventListener('hashchange', onHash)
-        return () => window.removeEventListener('hashchange', onHash)
-    }, [])
-
-    const Page = routes[hash] || Home
-
     return (
         <>
             <Navbar />
             <main>
-                <Page />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Navigate to="/" replace />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/howitworks" element={<HowItWorks />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
             </main>
             <Footer />
         </>
