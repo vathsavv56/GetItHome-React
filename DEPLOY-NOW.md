@@ -51,6 +51,7 @@ That's it! Your app will be live!
 `https://your-project-name.vercel.app`
 
 Test it:
+
 - ✅ Sign up
 - ✅ Login
 - ✅ Create bookings

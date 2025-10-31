@@ -14,7 +14,7 @@ app.use(express.json());
 let cachedDb = null;
 
 async function connectToDatabase() {
-  if (cachedDb) {
+  if (cachedDb && mongoose.connection.readyState === 1) {
     return cachedDb;
   }
 
@@ -24,9 +24,11 @@ async function connectToDatabase() {
     throw new Error("MONGODB_URI environment variable is not set");
   }
 
-  await mongoose.connect(MONGODB_URI, {
-    dbName: process.env.MONGODB_DB || "getithome",
-  });
+  if (mongoose.connection.readyState !== 1) {
+    await mongoose.connect(MONGODB_URI, {
+      dbName: process.env.MONGODB_DB || "getithome",
+    });
+  }
 
   cachedDb = mongoose.connection;
   console.log("MongoDB connected");
@@ -61,7 +63,9 @@ app.use(
       await connectToDatabase();
       next();
     } catch (error) {
-      res.status(500).json({ error: "Database connection failed" });
+      res
+        .status(500)
+        .json({ error: "Database connection failed: " + error.message });
     }
   },
   authRouter
@@ -74,7 +78,9 @@ app.use(
       await connectToDatabase();
       next();
     } catch (error) {
-      res.status(500).json({ error: "Database connection failed" });
+      res
+        .status(500)
+        .json({ error: "Database connection failed: " + error.message });
     }
   },
   bookingsRouter
@@ -87,5 +93,5 @@ app.use((err, _req, res, _next) => {
   res.status(status).json({ error: err.message || "Internal Server Error" });
 });
 
-// Export for Vercel serverless
+// Export handler for Vercel
 export default app;
