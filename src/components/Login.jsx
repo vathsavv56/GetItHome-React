@@ -19,7 +19,9 @@ export default function Login() {
             if (result.token) {
                 localStorage.setItem('token', result.token)
             }
-            navigate('/', { replace: true })
+            // Trigger a page reload to update navbar state
+            window.location.href = '#/'
+            window.location.reload()
         } catch (err) {
             setError(err.message || 'Login failed')
         } finally {

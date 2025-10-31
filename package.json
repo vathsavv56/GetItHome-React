@@ -9,7 +9,10 @@
     "preview": "vite preview",
     "server": "node server/index.js",
     "server:dev": "nodemon --watch server --ext js,jsx --exec node server/index.js",
-    "start": "concurrently \"npm run server:dev\" \"npm run dev\" --names \"API,WEB\" --prefix-colors \"blue,green\""
+    "start": "concurrently \"npm run server:dev\" \"npm run dev\" --names \"API,WEB\" --prefix-colors \"blue,green\"",
+    "seed": "node server/scripts/seed.js",
+    "seed:api": "node server/scripts/seed_via_api.js",
+    "seed:http": "node server/scripts/seed_via_http.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
