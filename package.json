@@ -12,7 +12,9 @@
     "start": "concurrently \"npm run server:dev\" \"npm run dev\" --names \"API,WEB\" --prefix-colors \"blue,green\"",
     "seed": "node server/scripts/seed.js",
     "seed:api": "node server/scripts/seed_via_api.js",
-    "seed:http": "node server/scripts/seed_via_http.js"
+    "seed:http": "node server/scripts/seed_via_http.js",
+    "vercel-build": "vite build",
+    "setup-vercel": "node setup-vercel.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
