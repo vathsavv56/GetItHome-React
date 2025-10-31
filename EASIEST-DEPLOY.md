@@ -14,7 +14,7 @@
    - Don't change anything, just click through
 5. **Make a database user:**
    - Username: `getithomeuser` (or anything you want)
-   - Click "Autogenerate Secure Password" 
+   - Click "Autogenerate Secure Password"
    - **📋 COPY THE PASSWORD!** (you'll need it!)
    - Click "Create User"
 6. **Allow connections:**
@@ -42,6 +42,7 @@ Example: `mongodb+srv://getithomeuser:MyPassword123@cluster0.abc123.mongodb.net/
 #### Easiest Way (Recommended):
 
 1. **Push your code to GitHub:**
+
    ```bash
    git init
    git add .
@@ -55,18 +56,19 @@ Example: `mongodb+srv://getithomeuser:MyPassword123@cluster0.abc123.mongodb.net/
 3. **Click "Login with GitHub"**
 
 4. **Import your repository:**
+
    - Find your repo in the list
    - Click "Import"
 
 5. **Add these 3 things:**
-   
+
    Click "Environment Variables" and add:
-   
-   | Name | Value |
-   |------|-------|
-   | `MONGODB_URI` | *Paste your MongoDB connection string from Thing 1* |
-   | `MONGODB_DB` | `getithome` |
-   | `JWT_SECRET` | `any-random-long-string-at-least-32-characters-long` |
+
+   | Name          | Value                                                |
+   | ------------- | ---------------------------------------------------- |
+   | `MONGODB_URI` | _Paste your MongoDB connection string from Thing 1_  |
+   | `MONGODB_DB`  | `getithome`                                          |
+   | `JWT_SECRET`  | `any-random-long-string-at-least-32-characters-long` |
 
 6. **Click "Deploy"**
 
@@ -109,12 +111,14 @@ Vercel automatically redeploys! No extra steps needed!
 ## ❓ Something Not Working?
 
 ### Can't connect to database?
+
 - Go to MongoDB Atlas
 - Click "Network Access"
 - Make sure `0.0.0.0/0` is there
 - If not, add it!
 
 ### API not working?
+
 - Go to Vercel Dashboard
 - Click your project
 - Settings → Environment Variables
@@ -122,6 +126,7 @@ Vercel automatically redeploys! No extra steps needed!
 - If you edit them, click "Redeploy" in Deployments tab
 
 ### Something else?
+
 - Check `QUICK-START.md` for more details
 - Check Vercel deployment logs for errors
 
@@ -140,6 +145,7 @@ Vercel automatically redeploys! No extra steps needed!
 ## 🎓 What You Just Did
 
 You deployed a full-stack application with:
+
 - ⚛️ React frontend (Vite)
 - 🔧 Express API backend (Serverless)
 - 🗄️ MongoDB database (Cloud)

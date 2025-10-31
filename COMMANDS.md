@@ -35,9 +35,11 @@ Then follow the visual guide in `EASIEST-DEPLOY.md`
 ## Step 3: Deploy to Vercel
 
 ### Option A: Click this link
+
 https://vercel.com/new
 
 Then:
+
 1. Login with GitHub
 2. Import your repository
 3. Add environment variables (see below)
@@ -98,6 +100,7 @@ That's it! Vercel auto-deploys! ✨
 ## 🆘 Quick Fixes
 
 ### Reset everything and redeploy:
+
 ```bash
 git add .
 git commit -m "Fix"
@@ -105,11 +108,13 @@ git push
 ```
 
 ### Check what's deployed:
+
 ```bash
 vercel ls
 ```
 
 ### See logs:
+
 ```bash
 vercel logs
 ```
@@ -119,11 +124,13 @@ vercel logs
 ## 📞 Get Help
 
 Run this command for interactive setup:
+
 ```bash
 npm run setup-vercel
 ```
 
 Or read these guides:
+
 - **Easiest:** `EASIEST-DEPLOY.md`
 - **Quick:** `QUICK-START.md`
 - **Detailed:** `DEPLOYMENT.md`
