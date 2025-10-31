@@ -1,38 +1,67 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import authRoutes from './routes/auth.js'
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import authRouter from "./routes/auth.js";
 
-dotenv.config()
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const app = express()
-const PORT = process.env.PORT || 5000
-const MONGODB_URI = process.env.MONGODB_URI || ''
+// Load .env from server directory
+dotenv.config({ path: join(__dirname, ".env") });
 
-app.use(cors())
-app.use(express.json())
+const app = express();
 
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', ts: Date.now() })
-})
+// Config
+const PORT = process.env.PORT || 5000;
+const MONGODB_URI = process.env.MONGODB_URI || "";
 
-app.use('/api/auth', authRoutes)
+// Middlewares
+app.use(cors({ origin: "*", credentials: false }));
+app.use(express.json());
 
+// Health check
+app.get("/api/health", (_req, res) => {
+  res.json({
+    ok: true,
+    service: "getithome-api",
+    time: new Date().toISOString(),
+  });
+});
+
+// Routes
+app.use("/api/auth", authRouter);
+
+// Global error handler
+// eslint-disable-next-line no-unused-vars
+app.use((err, _req, res, _next) => {
+  console.error("Error:", err);
+  const status = err.status || 500;
+  res.status(status).json({ error: err.message || "Internal Server Error" });
+});
+
+// Start server after DB connect
 async function start() {
-  if (!MONGODB_URI) {
-    console.error('Missing MONGODB_URI in environment')
-    process.exit(1)
-  }
   try {
-    await mongoose.connect(MONGODB_URI)
-    console.log('MongoDB connected')
-    app.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`))
+    if (!MONGODB_URI) {
+      console.warn(
+        "WARNING: MONGODB_URI is not set. Server will start but DB operations will fail."
+      );
+    } else {
+      await mongoose.connect(MONGODB_URI, {
+        dbName: process.env.MONGODB_DB || "getithome",
+      });
+      console.log("MongoDB connected");
+    }
+    app.listen(PORT, () => {
+      console.log(`API listening on http://localhost:${PORT}`);
+    });
   } catch (err) {
-    console.error('Failed to start server:', err)
-    process.exit(1)
+    console.error("Failed to start server:", err);
+    process.exit(1);
   }
 }
 
-start()
-
+start();

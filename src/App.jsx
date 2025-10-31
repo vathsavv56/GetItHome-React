@@ -6,7 +6,7 @@ import HowItWorks from './components/HowItWorks'
 import Services from './components/Services'
 import Login from './components/Login'
 import Signup from './components/Signup'
-import Footer from './components/FooterRouter'
+import Footer from './components/Footer'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 export default function App() {

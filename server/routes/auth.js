@@ -1,54 +1,61 @@
-import { Router } from 'express'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import User from '../models/User.js'
+import { Router } from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-const router = Router()
+const router = Router();
 
-function signToken(user) {
-  const payload = { sub: user._id.toString(), email: user.email, name: user.name || '' }
-  const secret = process.env.JWT_SECRET
-  const expiresIn = '7d'
-  return jwt.sign(payload, secret, { expiresIn })
-}
-
-router.post('/signup', async (req, res) => {
+// POST /api/auth/signup
+router.post("/signup", async (req, res, next) => {
   try {
-    const { name = '', email, password } = req.body
-    if (!email || !password) return res.status(400).json({ error: 'Email and password are required' })
-
-    const existing = await User.findOne({ email })
-    if (existing) return res.status(409).json({ error: 'Email already in use' })
-
-    const passwordHash = await bcrypt.hash(password, 10)
-    const user = await User.create({ name, email, passwordHash })
-
-    const token = signToken(user)
-    res.status(201).json({ token, user: { id: user._id, name: user.name, email: user.email } })
+    const { name = "", email, password } = req.body || {};
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
+    }
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ error: "Password must be at least 6 characters" });
+    }
+    const existing = await User.findOne({ email: email.toLowerCase() });
+    if (existing) {
+      return res.status(409).json({ error: "Email already registered" });
+    }
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = await User.create({ name, email, passwordHash });
+    return res.status(201).json({ user });
   } catch (err) {
-    console.error('Signup error:', err)
-    res.status(500).json({ error: 'Internal server error' })
+    // handle duplicate key error from Mongo
+    if (err?.code === 11000) {
+      return res.status(409).json({ error: "Email already registered" });
+    }
+    next(err);
   }
-})
+});
 
-router.post('/login', async (req, res) => {
+// POST /api/auth/login
+router.post("/login", async (req, res, next) => {
   try {
-    const { email, password } = req.body
-    if (!email || !password) return res.status(400).json({ error: 'Email and password are required' })
+    const { email, password } = req.body || {};
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
+    }
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) return res.status(401).json({ error: "Invalid credentials" });
+    const ok = await bcrypt.compare(password, user.passwordHash);
+    if (!ok) return res.status(401).json({ error: "Invalid credentials" });
 
-    const user = await User.findOne({ email })
-    if (!user) return res.status(401).json({ error: 'Invalid credentials' })
-
-    const ok = await bcrypt.compare(password, user.passwordHash)
-    if (!ok) return res.status(401).json({ error: 'Invalid credentials' })
-
-    const token = signToken(user)
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email } })
+    const JWT_SECRET = process.env.JWT_SECRET || "";
+    let token = null;
+    if (JWT_SECRET) {
+      token = jwt.sign({ sub: user.id, email: user.email }, JWT_SECRET, {
+        expiresIn: "7d",
+      });
+    }
+    return res.json({ user: user.toJSON(), token });
   } catch (err) {
-    console.error('Login error:', err)
-    res.status(500).json({ error: 'Internal server error' })
+    next(err);
   }
-})
+});
 
-export default router
-
+export default router;

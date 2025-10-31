@@ -11,7 +11,10 @@ export default function Navbar() {
                         <a href="#/howitworks">How It Works</a>
                         <a href="#/blog">Blog</a>
                     </nav>
-                    <a href="#/login" className="login-btn">Log In</a>
+                    <div style={{ display: 'flex', gap: '0.75rem' }}>
+                        <a href="#/login" className="login-btn">Log In</a>
+                        <a href="#/signup" className="login-btn" style={{ background: '#2563eb', color: '#fff' }}>Sign Up</a>
+                    </div>
                 </div>
             </div>
         </header>

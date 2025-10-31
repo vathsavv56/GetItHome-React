@@ -1,4 +1,4 @@
- import React, { useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../lib/api'
 
@@ -27,7 +27,7 @@ export default function Signup() {
   return (
     <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="login-card">
-        <h1 style={{  fontSize: '1.8rem', fontWeight: 700, marginBottom: '0.5rem' }}>Create your account</h1>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '0.5rem' }}>Create your account</h1>
         <p className="subtitle" style={{ marginBottom: '1.5rem', color: '#4a5568' }}>Sign up to start booking services.</p>
         {error && <div role="alert" style={{ color: '#b91c1c', marginBottom: '1rem' }}>{error}</div>}
         <form onSubmit={onSubmit}>
@@ -42,6 +42,9 @@ export default function Signup() {
           </div>
           <button type="submit" className="cta-button" disabled={loading} style={{ width: '100%' }}>{loading ? 'Creating...' : 'Sign Up'}</button>
         </form>
+        <p style={{ marginTop: '1.5rem', textAlign: 'center', color: '#4a5568' }}>
+          Already have an account? <a href="#/login" style={{ color: '#2563eb', fontWeight: 600 }}>Log in</a>
+        </p>
       </div>
     </section>
   )
