@@ -5,6 +5,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import authRouter from "./routes/auth.js";
+import bookingsRouter from "./routes/bookings.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,6 +34,7 @@ app.get("/api/health", (_req, res) => {
 
 // Routes
 app.use("/api/auth", authRouter);
+app.use("/api/bookings", bookingsRouter);
 
 // Global error handler
 // eslint-disable-next-line no-unused-vars
