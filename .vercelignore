@@ -1,0 +1,16 @@
+# Don't deploy these to Vercel
+
+node_modules
+.git
+.env
+server/.env
+\*.log
+.DS_Store
+README.md
+.vscode
+.idea
+
+# Test files
+
+test_login.js
+server/scripts/seed\*.js
