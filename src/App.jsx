@@ -6,6 +6,7 @@ import HowItWorks from './components/HowItWorks'
 import Services from './components/Services'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import MyAppointments from './components/MyAppointments'
 import Footer from './components/Footer'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
@@ -22,6 +23,7 @@ export default function App() {
                     <Route path="/services" element={<Services />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/appointments" element={<MyAppointments />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </main>

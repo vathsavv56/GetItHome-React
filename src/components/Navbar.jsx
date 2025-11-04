@@ -26,6 +26,7 @@ export default function Navbar() {
                         <a href="#/services">Services</a>
                         <a href="#/howitworks">How It Works</a>
                         <a href="#/blog">Blog</a>
+                        {isLoggedIn && <a href="#/appointments">My Appointments</a>}
                     </nav>
                     <div style={{ display: 'flex', gap: '0.75rem' }}>
                         {isLoggedIn ? (

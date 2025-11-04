@@ -26,4 +26,5 @@ export const api = {
     request("/auth/login", { method: "POST", body: JSON.stringify(payload) }),
   createBooking: (payload) =>
     request("/bookings", { method: "POST", body: JSON.stringify(payload) }),
+  getBookings: () => request("/bookings", { method: "GET" }),
 };
