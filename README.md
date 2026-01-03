@@ -1,3 +1,5 @@
+This is a vibe coded Project
+
 # GetItHome-React
 
 GetItHome — React rewrite with Vite
